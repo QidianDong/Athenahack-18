@@ -4,10 +4,11 @@ import sys
 from pathlib import Path
 
 import uvicorn
+from uvicorn.supervisors import Multiprocess
+
 from core import Server
 from routes import router
 from utils.config import ServerConfig
-from uvicorn.supervisors import Multiprocess
 
 config_path = Path(__file__).parent / "config.yml"
 config = ServerConfig(config_path)

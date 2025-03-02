@@ -4,6 +4,7 @@ from typing import AsyncGenerator
 
 import asyncpg
 from sonyflake import SonyFlake
+
 from utils.requests import RouteRequest
 
 _id_generator = SonyFlake()

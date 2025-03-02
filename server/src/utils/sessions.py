@@ -8,6 +8,7 @@ import asyncpg
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel
+
 from utils import db
 
 SESSION_EXPIRY = timedelta(days=7)

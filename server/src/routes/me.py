@@ -3,6 +3,7 @@ from typing import Annotated, Optional
 import asyncpg
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
+
 from utils import db
 from utils.exceptions import ConflictException, NotFoundException, UnauthorizedException
 from utils.requests import RouteRequest

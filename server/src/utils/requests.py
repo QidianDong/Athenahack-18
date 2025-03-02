@@ -1,5 +1,6 @@
-from core import Server
 from fastapi import Request
+
+from core import Server
 
 
 class RouteRequest(Request):
