@@ -1,8 +1,8 @@
 version: '3'
 
-dotenv: ['backend/docker/.env']
+dotenv: ['server/docker/.env']
 
 includes:
   server:
-    taskfile: ./backend/taskfile.yml
-    dir: ./backend
+    taskfile: ./server/taskfile.yml
+    dir: ./server
