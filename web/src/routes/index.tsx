@@ -1,9 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
 
-// @ts-ignore
-export const Route = createFileRoute("/")({
-  component: Index,
-});
 
 function Index() {
   return (
@@ -12,3 +7,5 @@ function Index() {
     </div>
   );
 }
+
+export default Index;
