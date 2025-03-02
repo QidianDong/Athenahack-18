@@ -38,5 +38,28 @@ services:
       start_period: 5m
     restart: always
 
+  redis:
+    container_name: redis
+    image: redis:7-alpine
+    healthcheck:
+      test: redis-cli ping || exit 1
+    ports:
+      - 6379:6379
+    restart: always
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:4-management
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RMQ_USER}
+      RABBITMQ_DEFAULT_PASSWORD: ${RMQ_PASSWORD}
+    hostname: broker-rabbit
+    ports:
+      - 5672:5672
+      - 8080:15672
+    env_file:
+      - .env
+    restart: always
+
 volumes:
   database:
