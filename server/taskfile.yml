@@ -1,6 +1,5 @@
 version: '3'
 
-dotenv: ['docker/.env']
 
 tasks:
   compose:
@@ -29,19 +28,19 @@ tasks:
 
   start:
     preconditions:
-      - test -f server/config.yml
+      - test -f src/config.yml
     cmds:
-      - uvicorn launcher:app --app-dir=server --reload-exclude=venv --reload
+      - uvicorn launcher:app --app-dir=src --reload-exclude=venv --reload
     silent: true
   
   check:
     cmds:
-      - pyright server
+      - pyright src
       - ruff check server --fix --exit-non-zero-on-fix
     silent: true
 
   ruff:
     cmds:
-      - ruff check server --fix --exit-non-zero-on-fix
-      - ruff format server
+      - ruff check src --fix --exit-non-zero-on-fix
+      - ruff format src
     silent: true

@@ -8,7 +8,7 @@ RUN apt-get update \
   && apt-get clean
 
 WORKDIR /template
-COPY /server /template/server/
+COPY /src /template/src/
 COPY /requirements.txt /template/requirements.txt
 
 RUN adduser --disabled-password --gecos "" template \
@@ -24,6 +24,6 @@ EXPOSE 8000
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD ["python3", "/template/server/launcher.py", "--no-workers"]
+CMD ["python3", "/template/src/launcher.py", "--no-workers"]
 
 STOPSIGNAL SIGTERM
