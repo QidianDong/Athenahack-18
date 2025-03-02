@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10,<4.0"
 
 [tool.pyright]
-include = ["server/**/*.py"]
+include = ["src/**/*.py"]
 exclude = ["**/__pycache__", "**/.venv"]
 reportMissingImports = true
 typeCheckingMode = "basic"
@@ -17,7 +17,7 @@ skips = ["B311", "B101"]
 
 [tool.ruff]
 line-length = 88
-extend-include = ["server/**/*.py"]
+extend-include = ["src/**/*.py"]
 extend-exclude = ["**/__pycache__", "**/.venv"]
 
 [tool.ruff.lint]
