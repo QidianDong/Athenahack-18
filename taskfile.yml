@@ -1,0 +1,8 @@
+version: '3'
+
+dotenv: ['backend/docker/.env']
+
+includes:
+  server:
+    taskfile: ./backend/taskfile.yml
+    dir: ./backend

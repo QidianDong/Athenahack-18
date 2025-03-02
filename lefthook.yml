@@ -1,0 +1,19 @@
+pre-commit:
+  commands:
+    biome-check:
+      root: "web"
+      glob: "web/**/.*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      exclude: src/routeTree.gen.ts
+      run: npx --yes @biomejs/biome check --write --error-on-warnings --no-errors-on-unmatched --colors=off {staged_files}
+      stage_fixed: true
+    ruff-check:
+      root: "backend"
+      glob: "backend/**/*.py" 
+      staged_files: true
+      run: ruff check {staged_files} --fix --exit-non-zero-on-fix
+    ruff-fmt:
+      glob: "backend/**/*.py" 
+      staged_files: true
+      run: ruff format {staged_files}
+    
+
