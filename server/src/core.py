@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from typing import TYPE_CHECKING, Any, Generator, Optional, Self
 
 import asyncpg
+from celery import Celery
 from fastapi import Depends, FastAPI, status
 from fastapi.openapi.utils import get_openapi
 from fastapi.responses import ORJSONResponse
@@ -22,7 +23,11 @@ class Server(FastAPI):
     pool: asyncpg.Pool
 
     def __init__(
-        self, *, loop: Optional[asyncio.AbstractEventLoop] = None, config: ServerConfig
+        self,
+        *,
+        loop: Optional[asyncio.AbstractEventLoop] = None,
+        celery: Celery,
+        config: ServerConfig,
     ):
         self.loop: asyncio.AbstractEventLoop = (
             loop or asyncio.get_event_loop_policy().get_event_loop()
@@ -39,6 +44,16 @@ class Server(FastAPI):
             lifespan=self.lifespan,
         )
         self.config = config
+        self.celery = celery
+
+    async def send_task(self, name: str, collect: bool = False, *args):
+        result = await self.loop.run_in_executor(
+            None, self.celery.send_task, name, args
+        )
+
+        if collect:
+            return [item for item in result.collect()]
+        return result.get()
 
     ### Server-related utilities
 
