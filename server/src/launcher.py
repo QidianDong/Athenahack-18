@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 
 import uvicorn
+from celery import Celery
 from uvicorn.supervisors import Multiprocess
 
 from core import Server
@@ -13,9 +14,16 @@ from utils.config import ServerConfig
 config_path = Path(__file__).parent / "config.yml"
 config = ServerConfig(config_path)
 
+celery = Celery(
+    "template",
+    backend=config["redis_uri"],
+    broker=config["broker_uri"],
+    include=["src.tasks"],
+)
 
-app = Server(config=config)
+app = Server(celery=celery, config=config)
 app.include_router(router)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -59,4 +67,5 @@ if __name__ == "__main__":
     else:
         runner = server
 
+    celery.start()
     runner.run()

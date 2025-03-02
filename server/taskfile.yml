@@ -30,7 +30,7 @@ tasks:
     preconditions:
       - test -f src/config.yml
     cmds:
-      - uvicorn launcher:app --app-dir=src --reload-exclude=venv --reload
+      - uvicorn launcher:app --app-dir=src --reload-exclude=server/.venv --reload
     silent: true
   
   check:
