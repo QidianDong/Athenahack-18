@@ -46,13 +46,10 @@ class Server(FastAPI):
         self.config = config
         self.celery = celery
 
-    async def send_task(self, name: str, collect: bool = False, *args):
+    async def send_task(self, name: str, *args):
         result = await self.loop.run_in_executor(
             None, self.celery.send_task, name, args
         )
-
-        if collect:
-            return [item for item in result.collect()]
         return result.get()
 
     ### Server-related utilities
