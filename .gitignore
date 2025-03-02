@@ -7,10 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-**/node_modules/
-**/dist/
-**/dist-ssr/
-**/*.local/
+node_modules
+dist
+dist-ssr
+*.local
 
 # Editor directories and files
 .vscode/*
@@ -199,5 +199,4 @@ cython_debug/
 .pypirc
 
 # Server configuration file
-**/config.yml
-
+config.yml
