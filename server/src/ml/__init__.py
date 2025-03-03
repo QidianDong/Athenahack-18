@@ -1,9 +1,10 @@
+from typing import TypedDict
+
 import torch
-from pydantic import BaseModel
 from transformers import AutoModelForMaskedLM, AutoTokenizer, pipeline
 
 
-class PredictedResult(BaseModel, frozen=True):
+class PredictedResult(TypedDict):
     text: str
     label: str
     score: float

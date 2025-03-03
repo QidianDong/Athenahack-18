@@ -1,15 +1,14 @@
 import uuid
 
 from launcher import celery
-
-from ..ml import Predictor
+from ml import Predictor
 
 predictor = Predictor()
 
 
 @celery.task(name="scan.text.reason")
 def scan_text_reason(texts: list[str]) -> list[str]:
-    return [result.label for result in predictor.predict(texts)]
+    return [result["label"] for result in predictor.predict(texts)]
 
 
 @celery.task(name="scan.text")
